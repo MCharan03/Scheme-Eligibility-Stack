@@ -1,0 +1,46 @@
+{
+  "scheme_id": "pm_jay",
+  "scheme_name": "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (AB PM-JAY)",
+  "short_name": "PM-JAY",
+  "ministry": "Ministry of Health and Family Welfare",
+  "department": "National Health Authority (NHA)",
+  "source_title": "Ayushman Bharat PM-JAY Official Portal and Guidelines",
+  "source_url": "https://nha.gov.in/PM-JAY",
+  "target_beneficiaries": "Poor, deprived rural families and identified occupational categories of urban workers; senior citizens aged 70+",
+  "eligibility_criteria": {
+    "rural_criteria": "Identified deprived households based on SECC 2011: (D1) Only one room with kucha walls/roof, (D2) No adult member aged 16-59, (D3) Female-headed household with no adult male member, (D4) Disabled member and no able-bodied adult, (D5) SC/ST households, (D7) Landless households deriving major income from manual casual labour",
+    "urban_criteria": "11 defined occupational categories: Ragpicker, beggar, domestic worker, street vendor, cobbler/hawker, construction worker, plumber, mason, painter, transport worker, shop worker, waiter, mechanic",
+    "senior_citizen_expansion": "All senior citizens aged 70 years and above are eligible for distinct top-up cover of Rs. 5 lakh per year irrespective of socio-economic status",
+    "family_cap": "No cap on family size or age of members",
+    "exclusions": [
+      "Households owning motorized 2/3/4 wheeler or mechanized agricultural equipment",
+      "Households having Kisan Credit Card with credit limit of Rs. 50,000 or above",
+      "Households with any member as a government employee",
+      "Households paying income tax or professional tax",
+      "Households owning a pucca house with more than 3 rooms"
+    ]
+  },
+  "benefits": {
+    "health_cover": "Rs. 5,00,000 per family per year on a family floater basis for secondary and tertiary care hospitalization",
+    "coverage_details": "Covers medical examination, consultation, treatment, pre and post-hospitalization expenses (up to 3 days pre and 15 days post), diagnostic and lab investigations, medicine costs, ICU and bed charges",
+    "cashless_nature": "100% cashless and paperless at all empaneled public and private hospitals across India"
+  },
+  "application_process": {
+    "online_portal": "https://beneficiary.nha.gov.in/",
+    "online_steps": [
+      "Visit the NHA Beneficiary Portal https://beneficiary.nha.gov.in/ or download the Ayushman App",
+      "Log in with active mobile number using OTP authentication",
+      "Search beneficiary family using Aadhaar number, Ration Card number, or Family ID",
+      "If name appears, proceed with e-KYC using Aadhaar OTP, IRIS, or fingerprint",
+      "Capture live photograph and match demographic details",
+      "Download Ayushman Card (Golden Card) upon approval"
+    ],
+    "offline_option": "Visit any Empaneled Health Care Provider (EHCP) hospital and approach the 'Ayushman Mitra' desk, or visit a local Common Service Centre (CSC) with Ration Card and Aadhaar"
+  },
+  "required_documents": [
+    "Aadhaar Card of the individual member",
+    "Ration Card or State-recognized Family Identification Document",
+    "Active mobile number linked with Aadhaar",
+    "Government Photo ID Proof (Voter ID, Driving License) if secondary verification required"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "scheme_id": "pm_kisan",
+  "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+  "short_name": "PM-KISAN",
+  "ministry": "Ministry of Agriculture & Farmers Welfare",
+  "department": "Department of Agriculture and Farmers Welfare",
+  "source_title": "PM-KISAN Official Operational Guidelines & Portal",
+  "source_url": "https://pmkisan.gov.in/",
+  "target_beneficiaries": "Small and marginal farmer families owning cultivable land",
+  "eligibility_criteria": {
+    "occupation": "Farmer / Cultivator",
+    "citizenship": "Indian citizen",
+    "land_ownership": "Must own cultivable landholding in their name as per official state land records",
+    "family_definition": "Farmer family consists of husband, wife, and minor children",
+    "income_limit": "No explicit cap, but excluded if paying income tax",
+    "exclusions": [
+      "All institutional landholders",
+      "Farmer families in which one or more of its members hold or held constitutional posts",
+      "Former and present Ministers/State Ministers, MPs, MLAs, MLCs, Mayors of Municipal Corporations, Chairpersons of District Panchayats",
+      "Serving or retired officers and employees of Central/State Government Ministries, Departments and field units (excluding Multi Tasking Staff / Class IV / Group D employees)",
+      "All superannuated / retired pensioners whose monthly pension is Rs. 10,000/- or more (excluding Group D / MTS)",
+      "All persons who paid Income Tax in the last assessment year",
+      "Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with professional bodies and carrying out practice"
+    ]
+  },
+  "benefits": {
+    "financial_assistance": "Rs. 6,000 per year provided to eligible farmer families",
+    "payment_mode": "Direct Benefit Transfer (DBT) in three equal 4-monthly installments of Rs. 2,000 each",
+    "disbursement_schedule": "Period 1: April-July; Period 2: August-November; Period 3: December-March"
+  },
+  "application_process": {
+    "online_portal": "https://pmkisan.gov.in/",
+    "online_steps": [
+      "Visit official portal https://pmkisan.gov.in/ and navigate to 'Farmers Corner'",
+      "Select 'New Farmer Registration' and choose Rural or Urban Farmer Registration",
+      "Enter Aadhaar Number, active Mobile Number, and select State",
+      "Authenticate using Aadhaar OTP received on registered mobile number",
+      "Fill landholding details (survey number, khasra/khatian number, area in hectares)",
+      "Upload land ownership documents and submit application",
+      "Complete mandatory e-KYC (biometric via CSC or OTP-based on portal)"
+    ],
+    "offline_option": "Visit nearest Common Service Centre (CSC), local Village Patwari, Revenue Officer, or Nodal Officer (PM-KISAN) nominated by State Government"
+  },
+  "required_documents": [
+    "Aadhaar Card of the applicant farmer",
+    "Land ownership document / Record of Rights (RoR) / Khatoni / Patta",
+    "Aadhaar-seeded active Bank Account Passbook with IFSC code",
+    "Active Mobile Number linked with Aadhaar",
+    "Citizenship and identity proof"
+  ]
+}

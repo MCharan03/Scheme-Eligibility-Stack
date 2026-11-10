@@ -1,0 +1,50 @@
+{
+  "scheme_id": "pm_mudra",
+  "scheme_name": "Pradhan Mantri MUDRA Yojana (PMMY)",
+  "short_name": "PMMY / MUDRA",
+  "ministry": "Ministry of Finance",
+  "department": "Department of Financial Services",
+  "source_title": "Micro Units Development & Refinance Agency Official Scheme Guidelines",
+  "source_url": "https://www.mudra.org.in/",
+  "target_beneficiaries": "Non-corporate, non-farm small and micro enterprises seeking loans up to Rs. 10-20 Lakhs",
+  "eligibility_criteria": {
+    "citizenship": "Indian citizen",
+    "business_nature": "Non-farm income generating micro/small business in manufacturing, trading, or service sector, including allied agricultural activities (poultry, dairy, beekeeping, fishery)",
+    "credit_history": "Must not be a defaulter to any commercial bank, cooperative bank, or financial institution",
+    "loan_categories": [
+      "Shishu: Loans up to Rs. 50,000 for early-stage micro entrepreneurs",
+      "Kishore: Loans above Rs. 50,000 and up to Rs. 5,00,000 for established small units seeking expansion",
+      "Tarun: Loans above Rs. 5,00,000 and up to Rs. 10,00,000 (extended up to Rs. 20,00,000 for entrepreneurs who repaid previous Tarun loans successfully)"
+    ],
+    "exclusions": [
+      "Large corporate enterprises",
+      "Direct crop cultivation (pure farming crop loans covered under KCC rather than MUDRA)",
+      "Individuals with defaulting loan history in CIBIL/credit bureaus"
+    ]
+  },
+  "benefits": {
+    "collateral": "No collateral security or third-party guarantee required for loans up to Rs. 10 Lakhs",
+    "processing_fee": "Nil processing fee for Shishu and Kishore loans across most banks",
+    "mudra_card": "MUDRA RuPay Debit Card issued for working capital overdraft needs"
+  },
+  "application_process": {
+    "online_portal": "https://udyamimitra.in/",
+    "online_steps": [
+      "Visit official Udyamimitra portal https://udyamimitra.in/ or JanSamarth portal https://www.jansamarth.in/",
+      "Register an applicant profile with name, email, and mobile number",
+      "Select 'Apply for MUDRA Loan' and choose loan category (Shishu, Kishore, or Tarun)",
+      "Enter proposed business enterprise details, activity, estimated cost, and required loan amount",
+      "Upload required business proposals, KYC documents, and quotes",
+      "Select preferred lender bank/branch and submit application"
+    ],
+    "offline_option": "Submit application directly at any branch of Commercial Banks, Regional Rural Banks (RRBs), Small Finance Banks, or NBFC-MFIs"
+  },
+  "required_documents": [
+    "Proof of Identity (Aadhaar Card, Voter ID, PAN Card, Driving License)",
+    "Proof of Residence (Electricity Bill, Aadhaar, Telephone Bill, Ration Card)",
+    "Udyam Enterprise Registration Certificate / Trade License if business is registered",
+    "Quotation of machinery, tools, or items to be purchased with supplier details",
+    "Bank account statements for the last 6 months (for Kishore and Tarun categories)",
+    "Proof of SC/ST/OBC category certificate if claiming affirmative lending priority"
+  ]
+}

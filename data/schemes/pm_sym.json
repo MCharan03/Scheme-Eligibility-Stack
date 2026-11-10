@@ -1,0 +1,44 @@
+{
+  "scheme_id": "pm_sym",
+  "scheme_name": "Pradhan Mantri Shram Yogi Maan-dhan (PM-SYM)",
+  "short_name": "PM-SYM",
+  "ministry": "Ministry of Labour & Employment",
+  "department": "Ministry of Labour & Employment",
+  "source_title": "PM-SYM Scheme Guidelines - Ministry of Labour & Employment",
+  "source_url": "https://maandhan.in/",
+  "target_beneficiaries": "Unorganized workers aged 18 to 40 years earning Rs. 15,000 or less per month",
+  "eligibility_criteria": {
+    "occupation": "Unorganized worker (street vendor, agriculture worker, construction worker, head loader, domestic worker, cobbler, auto rickshaw driver, ragpicker, brick kiln worker, beedi worker, etc.)",
+    "entry_age": "Between 18 and 40 years of age",
+    "monthly_income": "Monthly income must not exceed Rs. 15,000 per month",
+    "exclusions": [
+      "Any worker covered under organized social security schemes: Employees' Provident Fund Organization (EPFO)",
+      "Any worker covered under Employees' State Insurance Corporation (ESIC)",
+      "Any subscriber to National Pension System (NPS) contributed by Central Government",
+      "Any individual who is an Income Tax payer"
+    ]
+  },
+  "benefits": {
+    "assured_pension": "Guaranteed minimum monthly pension of Rs. 3,000 upon attaining the age of 60 years",
+    "government_contribution": "50% matching monthly contribution by Central Government (matching worker's monthly contribution between Rs. 55 and Rs. 200 depending on entry age)",
+    "family_pension": "If subscriber dies, spouse receives 50% of pension (Rs. 1,500/month) as family pension"
+  },
+  "application_process": {
+    "online_portal": "https://maandhan.in/",
+    "online_steps": [
+      "Visit official portal https://maandhan.in/ and click on 'Enrollment'",
+      "Select 'Self Enrollment' and enter 10-digit mobile number for OTP login",
+      "Enter Aadhaar Number, Name as per Aadhaar, Date of Birth, Gender, and State",
+      "Provide Bank Account details (Account Number, Bank Name, Branch, IFSC Code)",
+      "Select monthly contribution auto-debit consent and print auto-debit mandate form",
+      "Upload signed auto-debit mandate copy and download PM-SYM Pension Card"
+    ],
+    "offline_option": "Visit nearest Common Service Centre (CSC) with Aadhaar Card and Savings Bank Passbook/Jan Dhan Account; Village Level Entrepreneur (VLE) completes biometric authentication and issues Shram Yogi Pension Card immediately"
+  },
+  "required_documents": [
+    "Aadhaar Card",
+    "Savings Bank Account Passbook or Jan Dhan Bank Account with IFSC code",
+    "Active Mobile Number",
+    "Signed Auto-debit Mandate form"
+  ]
+}

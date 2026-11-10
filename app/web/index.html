@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government Scheme Eligibility Navigator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="brand">
+      <div class="brand-mark">GOI</div>
+      <div class="brand-text">Scheme Eligibility Navigator</div>
+      <span class="brand-divider">/</span>
+      <span class="brand-subtext">Official Gazette Verification</span>
+    </div>
+    <div class="telemetry-group">
+      <div class="telemetry-tag" id="telemetry-llm">LLM: Local Engine</div>
+      <div class="telemetry-tag" id="telemetry-db">ChromaDB: 25 Chunks</div>
+    </div>
+  </header>
+
+  <!-- Workbench Layout -->
+  <main class="workbench">
+    <!-- Left Column: Citizen Intake & Parameters -->
+    <section class="intake-pane">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Citizen Inquiry</div>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">LCEL Pipeline</span>
+        </div>
+
+        <!-- Presets -->
+        <div class="presets-row">
+          <span class="presets-label">Evaluation presets:</span>
+          <button type="button" class="preset-button" data-query="I am a 25 year old farmer from Karnataka with 3 acres of land. What government schemes can I apply for?">
+            Farmer with 3 acres land (Discovery)
+          </button>
+          <button type="button" class="preset-button" data-query="Am I eligible for PM-KISAN? I am a farmer from Karnataka.">
+            Farmer without land specified (Missing Info)
+          </button>
+          <button type="button" class="preset-button" data-query="How do I apply for PM-KISAN and what documents do I need?">
+            PM-KISAN application protocol & checklist
+          </button>
+          <button type="button" class="preset-button" data-query="I am an OBC college student with annual family income of Rs. 2.0 lakh. What scholarship can I get?">
+            OBC student with Rs. 2L income (Scholarship)
+          </button>
+          <button type="button" class="preset-button" data-query="I am a farmer with 5 acres of land in Karnataka, but I am an income tax payer. Can I get PM-KISAN?">
+            Farmer paying income tax (Exclusion)
+          </button>
+        </div>
+
+        <div class="textarea-wrapper">
+          <textarea id="user-query" class="intake-textarea" placeholder="Describe age, occupation, location, income, or specific scheme inquiry..."></textarea>
+        </div>
+
+        <!-- Parameters Drawer -->
+        <div class="params-header" id="params-toggle">
+          <span>Profile parameters (optional overrides)</span>
+          <span id="params-arrow" style="font-family: var(--font-mono); font-size: 11px;">[+]</span>
+        </div>
+
+        <div id="params-body" class="params-body hidden">
+          <div class="field-group">
+            <label>Age (years)</label>
+            <input type="number" id="profile-age" min="0" max="115" placeholder="None">
+          </div>
+          <div class="field-group">
+            <label>Gender</label>
+            <select id="profile-gender">
+              <option value="">Unspecified</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>State</label>
+            <select id="profile-state">
+              <option value="">Auto-detect</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="Uttar Pradesh">Uttar Pradesh</option>
+              <option value="Bihar">Bihar</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Occupation</label>
+            <select id="profile-occupation">
+              <option value="">Auto-detect</option>
+              <option value="Farmer">Farmer / Cultivator</option>
+              <option value="Student">Student</option>
+              <option value="Unorganized Worker">Unorganized Worker</option>
+              <option value="Micro Entrepreneur">Micro Entrepreneur</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Social category</label>
+            <select id="profile-category">
+              <option value="">Unspecified</option>
+              <option value="General">General</option>
+              <option value="OBC">OBC</option>
+              <option value="SC">SC</option>
+              <option value="ST">ST</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Cultivable land (acres)</label>
+            <input type="number" id="profile-land" min="0" step="0.5" placeholder="0.0">
+          </div>
+          <div class="field-group">
+            <label>Family income (annual ₹)</label>
+            <input type="number" id="profile-income" min="0" step="25000" placeholder="0">
+          </div>
+          <div class="field-group">
+            <label>Income tax payer</label>
+            <select id="profile-taxpayer">
+              <option value="">Unspecified</option>
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="button" id="submit-btn" class="btn-primary">
+          <span>Evaluate Eligibility & Guidance</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Right Column: Statutory Dossier & Execution Telemetry -->
+    <section class="dossier-pane">
+      <!-- Pipeline Steps Indicator -->
+      <div class="pipeline-bar">
+        <div class="pipe-step" id="pipe-router"><span>01</span> Intent</div>
+        <span class="pipe-divider">&rarr;</span>
+        <div class="pipe-step" id="pipe-retrieval"><span>02</span> Retrieval</div>
+        <span class="pipe-divider">&rarr;</span>
+        <div class="pipe-step" id="pipe-eligibility"><span>03</span> Rules</div>
+        <span class="pipe-divider">&rarr;</span>
+        <div class="pipe-step" id="pipe-application"><span>04</span> Protocol</div>
+        <span class="pipe-divider">&rarr;</span>
+        <div class="pipe-step" id="pipe-reflection"><span>05</span> Grounding</div>
+      </div>
+
+      <!-- Empty State Container -->
+      <div id="empty-state" class="empty-dossier">
+        <div class="empty-title">No Active Dossier</div>
+        <div class="empty-sub">Submit an inquiry or select a preset to cross-reference criteria against official documents.</div>
+      </div>
+
+      <!-- Live Results Container -->
+      <div id="live-results" class="hidden" style="display: flex; flex-direction: column; gap: 20px;">
+        <div id="evaluations-slot"></div>
+        <div id="protocol-slot"></div>
+
+        <!-- Citations & Trace Deck -->
+        <div class="footer-deck">
+          <div class="meta-card">
+            <div class="meta-title">Official Sources</div>
+            <div id="citations-slot" class="citation-list"></div>
+          </div>
+          <div class="meta-card">
+            <div class="meta-title">Execution Trace</div>
+            <div id="trace-slot"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

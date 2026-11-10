@@ -1,0 +1,628 @@
+/* Unslop Design System — Ink Neutral Ramp & Archival Civic Workbench */
+:root {
+  /* Ink Dark Ramp (from unslop tokens.md) */
+  --surface-deep: #07080d;
+  --surface-page: #0b0d14;
+  --surface-card: #11141c;
+  --surface-raised: #1a1e28;
+  --surface-active: #222736;
+  
+  --hairline: rgba(238, 240, 245, 0.08);
+  --hairline-subtle: rgba(238, 240, 245, 0.04);
+  --hairline-focus: rgba(37, 99, 235, 0.5);
+  
+  --text-primary: #eef0f5;
+  --text-secondary: #a3a9b8;
+  --text-muted: #7a8296;
+  
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  
+  /* Semantic Tokens (toned to sit inside the ramp) */
+  --semantic-pos: #4cc38a;
+  --semantic-pos-bg: rgba(76, 195, 138, 0.08);
+  --semantic-pos-border: rgba(76, 195, 138, 0.2);
+  
+  --semantic-neg: #e5484d;
+  --semantic-neg-bg: rgba(229, 72, 77, 0.08);
+  --semantic-neg-border: rgba(229, 72, 77, 0.2);
+  
+  --semantic-amber: #f59e0b;
+  --semantic-amber-bg: rgba(245, 158, 11, 0.08);
+  --semantic-amber-border: rgba(245, 158, 11, 0.2);
+  
+  --font-interface: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-quick: 140ms;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--surface-page);
+  color: var(--text-primary);
+  font-family: var(--font-interface);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* 1. Header Bar (56px tall, clean, quiet) */
+.top-bar {
+  height: 56px;
+  border-bottom: 1px solid var(--hairline);
+  background-color: var(--surface-deep);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--hairline);
+  background: var(--surface-raised);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.brand-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.brand-divider {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.brand-subtext {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.telemetry-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.telemetry-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 2. Main Workbench Layout (Capped at 1400px) */
+.workbench {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .workbench {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+}
+
+/* Left Pane: Intake Form */
+.intake-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Preset Chips */
+.presets-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.presets-label {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.preset-button {
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 7px 10px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--duration-quick) var(--ease), color var(--duration-quick) var(--ease);
+}
+
+.preset-button:hover {
+  background: var(--surface-active);
+  color: var(--text-primary);
+}
+
+/* Textarea & Inputs */
+.textarea-wrapper {
+  margin-bottom: 16px;
+}
+
+.intake-textarea {
+  width: 100%;
+  min-height: 100px;
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  font-family: var(--font-interface);
+  font-size: 13px;
+  color: var(--text-primary);
+  resize: vertical;
+  line-height: 1.5;
+  transition: border-color var(--duration-quick) var(--ease);
+}
+
+.intake-textarea:focus {
+  outline: none;
+  border-color: var(--hairline-focus);
+}
+
+/* Parameters Form Grid */
+.params-header {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  user-select: none;
+}
+
+.params-header:hover {
+  color: var(--text-primary);
+}
+
+.params-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding-top: 12px;
+  margin-bottom: 16px;
+  border-top: 1px solid var(--hairline-subtle);
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-group label {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.field-group input, .field-group select {
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-interface);
+  font-size: 12px;
+  padding: 6px 8px;
+  height: 32px;
+}
+
+.field-group input:focus, .field-group select:focus {
+  outline: none;
+  border-color: var(--hairline-focus);
+}
+
+/* Primary Button */
+.btn-primary {
+  width: 100%;
+  height: 40px;
+  background: var(--text-primary);
+  color: var(--surface-deep);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-interface);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition: opacity var(--duration-quick) var(--ease), transform var(--duration-quick) var(--ease);
+}
+
+.btn-primary:hover {
+  opacity: 0.92;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Right Pane: Dossier & Protocol Desk */
+.dossier-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Pipeline Status Steps */
+.pipeline-bar {
+  display: flex;
+  align-items: center;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  font-size: 12px;
+  gap: 8px;
+}
+
+.pipe-step {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.pipe-step.active {
+  color: var(--accent);
+}
+
+.pipe-step.done {
+  color: var(--semantic-pos);
+}
+
+.pipe-divider {
+  color: var(--text-muted);
+  opacity: 0.4;
+}
+
+/* Empty State */
+.empty-dossier {
+  border: 1px dashed var(--hairline);
+  border-radius: var(--radius-lg);
+  padding: 64px 32px;
+  text-align: center;
+}
+
+.empty-title {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.empty-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Scheme Dossier Card */
+.dossier-card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dossier-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.scheme-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.scheme-authority {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Status Badge */
+.status-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.status-badge.eligible {
+  background: var(--semantic-pos-bg);
+  color: var(--semantic-pos);
+  border: 1px solid var(--semantic-pos-border);
+}
+
+.status-badge.pending {
+  background: var(--semantic-amber-bg);
+  color: var(--semantic-amber);
+  border: 1px solid var(--semantic-amber-border);
+}
+
+.status-badge.ineligible {
+  background: var(--semantic-neg-bg);
+  color: var(--semantic-neg);
+  border: 1px solid var(--semantic-neg-border);
+}
+
+.scheme-summary {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Missing Info Callout (Amber line, quiet) */
+.missing-alert {
+  background: var(--semantic-amber-bg);
+  border-left: 2px solid var(--semantic-amber);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 10px 14px;
+  font-size: 12px;
+}
+
+.missing-alert-title {
+  color: var(--semantic-amber);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.missing-alert ul {
+  padding-left: 16px;
+  color: var(--text-primary);
+}
+
+/* Conditions Matrix */
+.matrix-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .matrix-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.matrix-block {
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px;
+}
+
+.matrix-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.condition-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.condition-item {
+  font-size: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.4;
+}
+
+.condition-item.met { color: var(--text-secondary); }
+.condition-item.unmet { color: var(--semantic-neg); }
+.condition-item.missing { color: var(--semantic-amber); }
+
+/* Application Protocol Section */
+.protocol-card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.protocol-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.steps-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.step-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--surface-raised);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.step-idx {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  width: 18px;
+  flex-shrink: 0;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  color: var(--text-primary);
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background var(--duration-quick) var(--ease);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-active);
+}
+
+/* Citations & Trace */
+.footer-deck {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .footer-deck {
+    grid-template-columns: 1fr;
+  }
+}
+
+.meta-card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.meta-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.citation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.citation-entry {
+  font-size: 11px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--hairline-subtle);
+  padding-bottom: 6px;
+}
+
+.citation-entry strong {
+  color: var(--text-secondary);
+}
+
+.citation-entry a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.trace-entry {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--hairline-subtle);
+}
+
+.trace-entry span {
+  color: var(--text-secondary);
+}
+
+.hidden { display: none !important; }
