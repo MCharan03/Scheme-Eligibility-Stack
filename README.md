@@ -6,7 +6,7 @@
 [![Orchestration](https://img.shields.io/badge/Orchestration-LangChain%20LCEL-orange.svg)](https://python.langchain.com/)
 [![Primary LLM](https://img.shields.io/badge/Primary%20LLM-Groq%20Cloud%20(GPT--OSS--20B)-purple.svg)](https://groq.com/)
 [![Vector Store](https://img.shields.io/badge/Vector%20Store-ChromaDB%20Persistent-red.svg)](https://www.trychroma.com/)
-[![Web UI](https://img.shields.io/badge/UI-FastAPI%20Workbench%20%2B%20Streamlit-teal.svg)](app/web/)
+[![Web UI](https://img.shields.io/badge/UI-FastAPI%20Workbench-teal.svg)](app/web/)
 
 > An authoritative, multi-agent AI system engineered to assist Indian citizens in discovering welfare entitlements, evaluating eligibility against statutory criteria, requesting missing profile attributes, and obtaining authenticated application guidance. Strictly grounded in official Government of India documentation with zero hallucinated URLs.
 
@@ -21,8 +21,6 @@
 6. [LLM Configuration (4-Tier Waterfall)](#llm-configuration-4-tier-waterfall)
 7. [Document Ingestion Workflow](#document-ingestion-workflow)
 8. [Running the Application](#running-the-application)
-   - [Option 1: Modern Bespoke Web Interface (FastAPI)](#option-1-modern-bespoke-web-interface-fastapi-recommended)
-   - [Option 2: Classical Streamlit Dashboard](#option-2-classical-streamlit-dashboard)
 9. [REST API Documentation](#rest-api-documentation)
 10. [Prompt Engineering & LCEL Chains](#prompt-engineering--lcel-chains)
 11. [Agentic RAG Implementation](#agentic-rag-implementation)
@@ -60,9 +58,8 @@ The **Scheme Eligibility Stack** resolves these shortcomings through strict, det
   2. *Tier 2 (Local LLM)*: Ollama (`llama3.2`).
   3. *Tier 3 (Cloud Fallback)*: OpenAI (`gpt-4o-mini`) or Google Gemini (`gemini-1.5-flash`).
   4. *Tier 4 (Offline Rule Engine)*: Built-in `FallbackDeterministicChatModel` ensuring 100% uptime and offline unit test compliance.
-- **Two Complete Frontends**:
-  - A modern, high-craft, unslopped workbench UI built with clean semantic HTML, CSS tokens, and reactive vanilla JavaScript.
-  - A rubric-compliant Streamlit interface with full form state preservation (`st.form`).
+- **Production Citizen Portal**:
+  - A modern, high-craft workbench UI built with clean semantic HTML, CSS tokens, and reactive vanilla JavaScript, served directly by FastAPI.
 
 ---
 
@@ -223,31 +220,26 @@ Successfully upserted 25 chunks into collection 'government_schemes'.
 
 ## Running the Application
 
-### Option 1: Modern Bespoke Web Interface (FastAPI) [Recommended]
-Launch the FastAPI web server mounting the high-craft frontend:
+Launch the unified FastAPI application server (serves both the Web Portal and REST API):
 
 ```bash
-python -m uvicorn app.api.server:app --host 127.0.0.1 --port 8000
+python app/main.py
 ```
-Visit: **`http://127.0.0.1:8000`**
+Or with Uvicorn directly:
+```bash
+uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+Visit:
+- **Citizen Web Portal:** `http://127.0.0.1:8000`
+- **Interactive Swagger API Docs:** `http://127.0.0.1:8000/docs`
+- **System Health & Vector DB Count:** `http://127.0.0.1:8000/api/status`
 
 **Key UI Highlights:**
 - **Sovereign Aesthetic:** Designed using neutral dark ramp tokens, crisp hairlines, and typography (Plus Jakarta Sans & JetBrains Mono).
 - **Interactive Preset Scenarios:** 1-click test chips for farmer discovery, missing information, senior citizens, and tax exclusions.
 - **Live Pipeline Animator:** Visual progress tracking through routing, retrieval, statutory evaluation, and verification stages.
 - **Audit & Execution Drawer:** Safe inspection of agent trace logs, confidence metrics, and grounding verification.
-
----
-
-### Option 2: Classical Streamlit Dashboard
-To launch the alternative Streamlit dashboard:
-
-```bash
-streamlit run app/main.py
-```
-Visit: **`http://localhost:8501`**
-
-Includes form-wrapped inputs (`st.form`) to guarantee widget state preservation on button submission.
 
 ---
 
@@ -388,7 +380,7 @@ tests/test_workflow_e2e.py::test_workflow_e2e_application_guidance PASSED [100%]
 | Mandatory Criterion | Implementation Details | Evidence & Source Files |
 |---|---|---|
 | **1. LLM Integration** | 4-tier model provider waterfall supporting Groq, Ollama, OpenAI, Gemini, and deterministic fallback. | [`app/llm/model.py`](app/llm/model.py)<br>[`.env.example`](.env.example) |
-| **2. Interactive GUI** | Bespoke Sovereign Web UI (FastAPI) and Streamlit dashboard with form-wrapped submission state preservation. | [`app/web/index.html`](app/web/index.html)<br>[`app/api/server.py`](app/api/server.py)<br>[`app/main.py`](app/main.py) |
+| **2. Interactive GUI** | Bespoke Sovereign Web UI served via FastAPI with live execution tracing and response dossiers. | [`app/web/index.html`](app/web/index.html)<br>[`app/api/server.py`](app/api/server.py)<br>[`app/main.py`](app/main.py) |
 | **3. Prompt Engineering** | Role definition, few-shot routing, strict JSON schema parsing, reflection grounding. | [`app/llm/prompts.py`](app/llm/prompts.py)<br>[`docs/PROMPT_ENGINEERING.md`](docs/PROMPT_ENGINEERING.md) |
 | **4. LangChain Core** | Native LangChain LCEL pipelines (`prompt \| llm \| parser`), `ChatPromptTemplate`, and `JsonOutputParser`. | [`app/agents/router_agent.py`](app/agents/router_agent.py)<br>[`app/agents/eligibility_agent.py`](app/agents/eligibility_agent.py) |
 | **5. Agentic RAG** | Dynamic retrieval gating, metadata-targeted querying, missing field detection, reflection. | [`app/services/workflow_orchestrator.py`](app/services/workflow_orchestrator.py)<br>[`docs/AGENTIC_RAG.md`](docs/AGENTIC_RAG.md) |
@@ -433,7 +425,7 @@ Scheme-Eligibility-Stack/
 │   │   ├── css/style.css         # Unslopped neutral design system tokens
 │   │   ├── js/app.js             # Reactive workbench application logic
 │   │   └── index.html            # Civic workbench layout
-│   └── main.py                   # Alternative Streamlit Dashboard
+│   └── main.py                   # Primary FastAPI Server Entry Point
 ├── data/
 │   └── schemes/                  # Official Government Scheme Documents (JSON)
 │       ├── pm_jay.json           # Ayushman Bharat PM-JAY

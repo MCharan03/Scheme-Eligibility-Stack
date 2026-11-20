@@ -35,9 +35,6 @@ chroma_db/
 *.db
 *.sqlite3
 
-# Streamlit
-.streamlit/secrets.toml
-
 # IDE & OS
 .vscode/
 .idea/
